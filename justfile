@@ -27,15 +27,18 @@ clean:
 # Run the development server using vercel-cli
 dev:
     @echo "Starting development server..."
+    vercel env pull .env
     vercel dev
 
 # Build the project using vercel-cli
 build:
     @echo "Building project..."
+    vercel env pull .env
     vercel build
 
 # Deploys the project to production using vercel-cli
 deploy:
     @echo "Deploying to production..."
+    vercel env pull --environment=production .env
     vercel build --prod
     vercel deploy --prebuilt --archive=tgz --prod

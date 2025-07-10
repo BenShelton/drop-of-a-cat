@@ -1,9 +1,12 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, PartialEq, Serialize, Deserialize)]
-pub struct Video {
-    pub id: u32,
-    pub title: String,
-    pub speaker: String,
-    pub url: String,
+pub struct LoginRequest {
+    pub name: String,
+    pub password: String,
+}
+
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
+pub struct LoginResponse {
+    pub result: bool,
 }

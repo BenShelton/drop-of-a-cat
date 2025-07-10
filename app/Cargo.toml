@@ -6,7 +6,12 @@ version = "0.1.0"
 [dependencies]
 dto = { path = "../dto" }
 
-yew = { version = "0.21", features = ["csr"] }
-gloo-net = "0.2"
+yew = { version = "0.21.0", features = ["csr"] }
+gloo-net = "0.6.0"
 serde = { version = "1.0.219", features = ["derive"] }
-wasm-bindgen-futures = "0.4"
+wasm-bindgen = "0.2.100"
+wasm-bindgen-futures = "0.4.50"
+
+[dependencies.web-sys]
+version = "0.3.77"
+features = ["console"]
