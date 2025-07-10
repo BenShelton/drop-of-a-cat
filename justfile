@@ -15,6 +15,7 @@ bootstrap:
     just clean
     cargo build
     pnpm install -g vercel
+    brew install tailwindcss
     @echo "✅ Bootstrap complete ✅"
 
 clean:
