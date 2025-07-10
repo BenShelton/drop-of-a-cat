@@ -10,3 +10,9 @@ pub struct LoginRequest {
 pub struct LoginResponse {
     pub result: bool,
 }
+
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
+pub struct APIError {
+    pub message: &'static str,
+    pub code: &'static str,
+}

@@ -13,9 +13,6 @@ serde_json = { version = "1.0.140", features = ["raw_value"] }
 vercel_runtime = "1.1.6"
 dotenvy_macro = "0.15.7"
 
-[lib]
-path = "src/lib.rs"
-
 [[bin]]
 name = "login"
 path = "login.rs"
