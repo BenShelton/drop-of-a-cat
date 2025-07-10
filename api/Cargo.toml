@@ -1,0 +1,16 @@
+[package]
+name = "functions"
+edition = "2021"
+version = "0.1.0"
+
+[dependencies]
+dto = { path = "../dto" }
+
+tokio = { version = "1", features = ["macros"] }
+serde_json = { version = "1.0.106", features = ["raw_value"] }
+vercel_runtime = { version = "1.1.3" }
+
+# Each handler has to be specified as [[bin]]
+[[bin]]
+name = "hello"
+path = "hello.rs"

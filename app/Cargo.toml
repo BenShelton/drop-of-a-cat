@@ -1,0 +1,12 @@
+[package]
+name = "drop-of-a-cat"
+edition = "2021"
+version = "0.1.0"
+
+[dependencies]
+dto = { path = "../dto" }
+
+yew = { version = "0.21", features = ["csr"] }
+gloo-net = "0.2"
+serde = { version = "1.0.219", features = ["derive"] }
+wasm-bindgen-futures = "0.4"

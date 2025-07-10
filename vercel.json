@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "devCommand": "trunk serve --config app/Trunk.toml --port $PORT",
+  "buildCommand": "trunk build --config app/Trunk.toml",
+  "outputDirectory": "app/dist",
+  "functions": {
+    "api/**/*.rs": {
+      "runtime": "vercel-rust@4.0.9"
+    }
+  }
+}

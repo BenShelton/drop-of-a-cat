@@ -1,0 +1,12 @@
+trunk-version = "^0.21.14"
+
+[build]
+target = "index.html"
+html_output = "index.html"
+release = false
+dist = "dist"
+public_url = "/"
+
+[serve]
+addresses = ["127.0.0.1"]
+no_spa = false
