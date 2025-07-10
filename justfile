@@ -18,17 +18,24 @@ bootstrap:
     brew install tailwindcss
     @echo "✅ Bootstrap complete ✅"
 
+# Cleans the project
 clean:
     @echo "Cleaning project..."
     cargo clean
     trunk clean
 
-# Run the development server
+# Run the development server using vercel-cli
 dev:
     @echo "Starting development server..."
     vercel dev
 
-# Build the project
+# Build the project using vercel-cli
 build:
     @echo "Building project..."
     vercel build
+
+# Deploys the project to production using vercel-cli
+deploy:
+    @echo "Deploying to production..."
+    vercel build --prod
+    vercel deploy --prebuilt --archive=tgz --prod

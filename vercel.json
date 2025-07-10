@@ -1,8 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "devCommand": "trunk serve --config app/Trunk.toml --port $PORT",
-  "installCommand": "./bin/vercel/install.sh",
-  "buildCommand": "./bin/vercel/build.sh",
+  "buildCommand": "trunk build --config app/Trunk.toml --release",
   "outputDirectory": "app/dist",
   "functions": {
     "api/**/*.rs": {
