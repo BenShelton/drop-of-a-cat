@@ -10,6 +10,10 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -28,13 +32,13 @@ jobs:
       - name: Rust cache
         uses: Swatinem/rust-cache@v2
       - name: Install Vercel
-        run: npm install --global vercel@canary
+        run: npm install --global vercel@latest
       - name: Install Tailwind
         run: npm install --global tailwindcss @tailwindcss/cli
-      - name: Pull Vercel Environment Secrets
-        run: vercel env pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} .env
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Pull Vercel Env File
+        run: vercel env pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} .env
       - name: Rust build
         uses: actions-rs/cargo@v1
         with:
