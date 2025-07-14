@@ -15,14 +15,16 @@ bootstrap:
     just clean
     cargo build
     pnpm install -g vercel
-    brew install tailwindcss
+    @if ! command -v tailwindcss 2>&1 >/dev/null; then \
+        echo "⚠️ tailwindcss not found, install from https://tailwindcss.com/blog/standalone-cli ⚠️"; \
+    fi
     @echo "✅ Bootstrap complete ✅"
 
 # Cleans the project
 clean:
     @echo "Cleaning project..."
+    trunk clean --config app/Trunk.toml
     cargo clean
-    trunk clean
 
 # Run the development server using vercel-cli
 dev:
@@ -36,11 +38,3 @@ build:
     vercel env pull .env
     trunk build --config app/Trunk.toml
     vercel build
-
-# Deploys the project to production using vercel-cli
-deploy:
-    @echo "Deploying to production..."
-    vercel env pull --environment=production .env
-    trunk build --config app/Trunk.toml --release
-    vercel build --prod
-    vercel deploy --prebuilt --archive=tgz --prod

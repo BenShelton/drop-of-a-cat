@@ -1,1 +1,8 @@
 @import "tailwindcss";
+@source "./index.html";
+@source "./src/**/*.rs";
+@plugin "./daisyui.js" {
+    themes:
+        cupcake --default,
+        night --prefersdark;
+}
