@@ -34,11 +34,13 @@ dev:
 build:
     @echo "Building project..."
     vercel env pull .env
+    trunk build --config app/Trunk.toml
     vercel build
 
 # Deploys the project to production using vercel-cli
 deploy:
     @echo "Deploying to production..."
     vercel env pull --environment=production .env
+    trunk build --config app/Trunk.toml --release
     vercel build --prod
     vercel deploy --prebuilt --archive=tgz --prod
