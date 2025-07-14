@@ -26,22 +26,22 @@ jobs:
           override: true
       - name: Rust cache
         uses: Swatinem/rust-cache@v2
+      - name: Install Vercel
+        run: npm install --global vercel@canary
+      - name: Install Tailwind
+        run: npm install --global tailwindcss @tailwindcss/cli
       - name: Pull Vercel Environment Secrets
         run: vercel env pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} .env
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Rust build
         uses: actions-rs/cargo@v1
         with:
           command: build
           args: --quiet --release
       - run: rm -rf target/release && mv target/x86_64-unknown-linux-musl/release target/release/
-      - name: Install Vercel
-        run: npm install --global vercel@canary
-      - name: Install Tailwind
-        run: npm install --global tailwindcss @tailwindcss/cli
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:
