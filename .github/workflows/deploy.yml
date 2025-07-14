@@ -1,0 +1,52 @@
+# see https://github.com/vercel-community/rust/issues/87#issuecomment-1493528798
+name: vercel-dev
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Rust setup
+        uses: actions-rs/toolchain@v1
+        with:
+          target: x86_64-unknown-linux-musl
+          profile: minimal
+          toolchain: stable
+          override: true
+      - run: rustup default stable-x86_64-unknown-linux-musl
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+      - name: Rust build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --quiet --release
+      - run: rm -rf target/release && mv target/x86_64-unknown-linux-musl/release target/release/
+      - name: Install Vercel
+        run: npm install --global vercel@canary
+      - name: Install Tailwind
+        run: npm install --global tailwindcss @tailwindcss/cli
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Pull Vercel Environment Secrets
+        run: vercel env pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-args: "--prebuilt --archive=tgz --prod"
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ vars.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ vars.VERCEL_PROJECT_ID }}
