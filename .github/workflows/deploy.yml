@@ -20,10 +20,10 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           target: x86_64-unknown-linux-musl
+          default: true
           profile: minimal
           toolchain: stable
           override: true
-      - run: rustup default stable-x86_64-unknown-linux-musl
       - name: Rust cache
         uses: Swatinem/rust-cache@v2
       - name: Rust build
