@@ -32,6 +32,16 @@ dev:
     vercel env pull .env
     vercel dev
 
+# Runs a local instance of the database
+db:
+    @echo "Starting database..."
+    @if ! command -v mongod 2>&1 >/dev/null; then \
+        echo "⚠️ mongod not found, install from https://www.mongodb.com/docs/manual/installation ⚠️"; \
+    else \
+        mkdir -p .database; \
+        mongod --dbpath .database; \
+    fi
+
 # Build the project using vercel-cli
 build:
     @echo "Building project..."

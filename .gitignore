@@ -1,4 +1,5 @@
 .DS_Store
+.database
 .vercel
 app/dist
 target
