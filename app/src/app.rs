@@ -48,7 +48,10 @@ pub fn app() -> Html {
                 }
                 let result = result.json::<LoginResponse>().await.unwrap();
                 match result.result {
-                    Some(user) => web_sys::console::log_1(&user.token.into()),
+                    Some(user) => {
+                        web_sys::console::log_1(&user.token.into());
+                        error_message.set(String::new());
+                    }
                     None => error_message.set("Login Failed, incorrect password.".to_string()),
                 }
                 loading.set(false);
