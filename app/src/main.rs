@@ -1,4 +1,8 @@
+#![allow(clippy::redundant_closure)]
+
 mod app;
+mod pages;
+mod router;
 
 use app::App;
 
