@@ -10,7 +10,7 @@ pub fn not_found_page() -> Html {
             <div class="hero-content">
                 <div class="max-w-md text-center">
                     <h1 class="text-5xl font-bold">
-                        { "Page not found" }
+                        { "Page Not Found" }
                     </h1>
                     <h2 class="py-6">
                         { "Page does not seem to exist" }
