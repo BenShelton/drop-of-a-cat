@@ -3,6 +3,6 @@
 @source "./src/**/*.rs";
 @plugin "./daisyui.js" {
     themes:
-        cupcake --default,
-        night --prefersdark;
+        fantasy --default,
+        dracula --prefersdark;
 }

@@ -12,12 +12,12 @@ pub struct Props {
 #[function_component(EventCard)]
 pub fn event_card(props: &Props) -> Html {
     html! {
-        <div class="card bg-primary text-primary-content w-96">
+        <div class="card bg-secondary text-secondary-content w-96">
             <div class="card-body">
                 <h2 class="card-title">{ &props.event.title }</h2>
                 <p>{ &props.event.description }</p>
                 <div class="card-actions justify-end">
-                    <Link<Route> to={Route::Event { uuid: props.event.uuid.clone() }} classes="btn btn-secondary">{ "Learn More" }</Link<Route>>
+                    <Link<Route> to={Route::Event { uuid: props.event.uuid.clone() }} classes="btn btn-primary">{ "Learn More" }</Link<Route>>
                 </div>
             </div>
         </div>

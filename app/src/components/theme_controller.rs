@@ -18,11 +18,11 @@ pub fn theme_controller() -> Html {
         },
         Theme {
             name: "Light".to_string(),
-            value: "cupcake".to_string(),
+            value: "fantasy".to_string(),
         },
         Theme {
             name: "Dark".to_string(),
-            value: "night".to_string(),
+            value: "dracula".to_string(),
         },
     ];
 
