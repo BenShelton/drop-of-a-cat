@@ -36,7 +36,7 @@ pub fn home_page() -> Html {
                     { "Upcoming Events" }
                 </h1>
             </div>
-            <div class="grid grid-cols-4 gap-4">
+            <div class="flex gap-4">
                 {
                     events.into_iter().map(|event| {
                         let title = event.title.clone();
