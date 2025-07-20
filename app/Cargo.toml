@@ -17,3 +17,7 @@ wasm-bindgen-futures = "0.4.50"
 [dependencies.web-sys]
 version = "0.3.77"
 features = ["console"]
+
+[dependencies.yew_icons]
+version = "0.8"
+features = ["HeroiconsSolidLightBulb"]

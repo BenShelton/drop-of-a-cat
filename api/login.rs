@@ -43,8 +43,8 @@ pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
                         name: payload.name,
                         token: Uuid::new_v4().to_string(),
                     };
-                    match collections::user::insert(user).await {
-                        Ok(user) => Some(user),
+                    match collections::user::insert(&user).await {
+                        Ok(()) => Some(user),
                         Err(_) => None,
                     }
                 } else {
