@@ -14,7 +14,7 @@ pub struct Event {
     pub date: String,
     pub time: String,
     pub location: String,
-    pub organizer: String,
+    pub organiser: String,
     pub contact_number: Option<String>,
     pub accepted: bool,
     pub accepted_by: Option<String>,

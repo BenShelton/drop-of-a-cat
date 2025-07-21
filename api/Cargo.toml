@@ -18,3 +18,15 @@ uuid = { version = "1.17.0", features = ["v4"] }
 [[bin]]
 name = "login"
 path = "login.rs"
+
+[[bin]]
+name = "suggestion"
+path = "suggestion.rs"
+
+[[bin]]
+name = "home"
+path = "home.rs"
+
+[[bin]]
+name = "event-uuid"
+path = "event/[uuid].rs"

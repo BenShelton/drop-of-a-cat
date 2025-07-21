@@ -15,6 +15,8 @@ pub async fn insert(event: &mut Event) -> Result<String, Error> {
     let collection = get_collection().await?;
     let uuid = Uuid::new_v4().to_string();
     event.uuid = uuid.clone();
+    event.accepted = false;
+    event.accepted_by = None;
     collection.insert_one(event).await?;
     Ok(uuid)
 }
