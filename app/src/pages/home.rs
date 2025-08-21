@@ -35,7 +35,7 @@ fn content() -> HtmlResult {
                         { "Upcoming Events" }
                     </h1>
                 </div>
-                <div class="flex gap-4">
+                <div class="flex flex-wrap gap-4">
                     {
                         events.iter().map(|event| {
                             let title = event.title.clone();

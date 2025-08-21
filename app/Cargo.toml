@@ -8,11 +8,13 @@ dto = { path = "../dto" }
 
 yew = { version = "0.21.0", features = ["csr"] }
 yew-router = "0.18.0"
+yew-hooks = "0.3.3"
 gloo-storage = "0.3.0"
 gloo-net = "0.6.0"
 serde = { version = "1.0.219", features = ["derive"] }
 wasm-bindgen = "0.2.100"
 wasm-bindgen-futures = "0.4.50"
+chrono = "0.4.41"
 
 [dependencies.web-sys]
 version = "0.3.77"
