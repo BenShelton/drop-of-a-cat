@@ -64,6 +64,7 @@ checksum = "d301b3b94cb4b2f23d7917810addbbaff90738e0ca2be692bd027e70d7e0330c"
 name = "api"
 version = "0.1.0"
 dependencies = [
+ "api_utils",
  "db",
  "dotenvy_macro",
  "dto",
@@ -72,6 +73,16 @@ dependencies = [
  "serde_json",
  "tokio",
  "uuid",
+ "vercel_runtime",
+]
+
+[[package]]
+name = "api_utils"
+version = "0.1.0"
+dependencies = [
+ "db",
+ "serde",
+ "serde_json",
  "vercel_runtime",
 ]
 

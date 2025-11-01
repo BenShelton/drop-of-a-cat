@@ -1,4 +1,4 @@
-use api::authorize_middleware;
+use api_utils::authorize_middleware;
 use db::collections;
 use dto::api::{APIError, HomeResponse};
 use http::Method;
