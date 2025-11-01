@@ -1,11 +1,9 @@
-use dto::api::HomeResponse;
-use gloo_net::http::Request;
 use gloo_storage::{LocalStorage, Storage};
 use yew::{prelude::*, suspense::use_future};
 use yew_icons::{Icon, IconId};
 use yew_router::prelude::*;
 
-use crate::{components::event_card::EventCard, router::Route};
+use crate::{api, components::event_card::EventCard, router::Route};
 
 #[function_component(Content)]
 fn content() -> HtmlResult {
@@ -13,18 +11,10 @@ fn content() -> HtmlResult {
     LocalStorage::delete("toast");
 
     let res = use_future(|| async {
-        let result = Request::get("/api/home")
-            .send()
-            .await
-            .map_err(|_| "Failed to fetch events".to_string())?;
-        if !result.ok() {
-            return Err("Failed to fetch events".to_string());
+        match api::home().await {
+            Ok(response) => Ok(response.events),
+            Err(_) => Err("Failed to fetch events".to_string()),
         }
-        let response = result
-            .json::<HomeResponse>()
-            .await
-            .map_err(|_| "Failed to fetch events".to_string())?;
-        Ok(response.events)
     })?;
 
     match *res {

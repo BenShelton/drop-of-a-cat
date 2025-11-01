@@ -1,5 +1,6 @@
 #![allow(clippy::redundant_closure)]
 
+mod api;
 mod app;
 mod components;
 mod pages;

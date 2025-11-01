@@ -2,11 +2,11 @@ use dto::api::EventResponse;
 use gloo_net::http::Request;
 use yew::{prelude::*, suspense::use_future};
 
-use crate::components::back_btn::BackBtn;
+use crate::{api::get_authorization_header, components::back_btn::BackBtn};
 
 #[derive(PartialEq, Properties)]
 pub struct Props {
-    pub uuid: String,
+    pub uuid: AttrValue,
 }
 
 #[function_component(Content)]
@@ -14,6 +14,7 @@ fn content(props: &Props) -> HtmlResult {
     let request = Request::get(format!("/api/event/{}", props.uuid).as_str());
     let res = use_future(|| async {
         let result = request
+            .header("Authorization", get_authorization_header().as_str())
             .send()
             .await
             .map_err(|_| "Failed to fetch event".to_string())?;

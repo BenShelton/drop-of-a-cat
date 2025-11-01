@@ -8,7 +8,7 @@ use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::hooks::use_navigator;
 
-use crate::{components::back_btn::BackBtn, router::Route};
+use crate::{api::get_authorization_header, components::back_btn::BackBtn, router::Route};
 
 #[function_component(SuggestionPage)]
 pub fn suggestion_page() -> Html {
@@ -55,6 +55,7 @@ pub fn suggestion_page() -> Html {
             wasm_bindgen_futures::spawn_local(async move {
                 loading.set(true);
                 let result = Request::post("/api/suggestion")
+                    .header("Authorization", get_authorization_header().as_str())
                     .json(&SuggestionRequest {
                         event: Event {
                             title: (*title).clone(),

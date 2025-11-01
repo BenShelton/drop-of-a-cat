@@ -15,6 +15,9 @@ vercel_runtime = "1.1.6"
 dotenvy_macro = "0.15.7"
 uuid = { version = "1.17.0", features = ["v4"] }
 
+[lib]
+path = "lib.rs"
+
 [[bin]]
 name = "login"
 path = "login.rs"

@@ -1,11 +1,13 @@
-use dto::api::{APIError, LoginRequest, LoginResponse};
-use gloo_net::http::Request;
+use dto::api::LoginRequest;
 use gloo_storage::{LocalStorage, Storage};
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-use crate::router::Route;
+use crate::{
+    api::{self, TOKEN_KEY},
+    router::Route,
+};
 
 #[function_component(LoginPage)]
 pub fn login_page() -> Html {
@@ -38,28 +40,23 @@ pub fn login_page() -> Html {
             let navigator = navigator.clone();
             wasm_bindgen_futures::spawn_local(async move {
                 loading.set(true);
-                let result = Request::post("/api/login")
-                    .json(&LoginRequest {
-                        name: (*name).clone(),
-                        password: (*password).clone(),
-                    })
-                    .unwrap()
-                    .send()
-                    .await
-                    .unwrap();
-                if !result.ok() {
-                    let err = result.json::<APIError>().await.unwrap().message.to_string();
-                    error_message.set(err);
-                    loading.set(false);
-                    return;
-                }
-                let result = result.json::<LoginResponse>().await.unwrap();
-                match result.result {
-                    Some(user) => {
-                        LocalStorage::set("token", user.token).unwrap();
-                        navigator.push(&Route::Home);
+                let request = LoginRequest {
+                    name: (*name).clone(),
+                    password: (*password).clone(),
+                };
+                match api::login(&request).await {
+                    Ok(result) => match result.result {
+                        Some(user) => {
+                            LocalStorage::set(TOKEN_KEY, user.token).unwrap();
+                            navigator.push(&Route::Home);
+                        }
+                        None => {
+                            error_message.set("Login Failed, incorrect password.".to_string());
+                        }
+                    },
+                    Err(err) => {
+                        error_message.set(err);
                     }
-                    None => error_message.set("Login Failed, incorrect password.".to_string()),
                 }
                 loading.set(false);
             })

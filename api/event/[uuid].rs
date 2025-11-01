@@ -1,3 +1,4 @@
+use api::authorize_middleware;
 use db::collections;
 use dto::api::{APIError, EventResponse};
 use http::Method;
@@ -12,8 +13,10 @@ async fn main() -> Result<(), Error> {
 }
 
 pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
-    // TODO: Add authentication middleware
     assert_eq!(*req.method(), Method::GET);
+    if let Some(response) = authorize_middleware(&req).await {
+        return Ok(response);
+    };
 
     let uuid = req.uri().query().and_then(|query| {
         query

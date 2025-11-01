@@ -4,8 +4,8 @@ use yew_hooks::use_interval;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
-    pub date: String,
-    pub time: String,
+    pub date: AttrValue,
+    pub time: AttrValue,
 }
 
 #[function_component(Countdown)]

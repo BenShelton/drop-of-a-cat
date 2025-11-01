@@ -1,3 +1,4 @@
+use api::authorize_middleware;
 use db::collections;
 use dto::api::{APIError, HomeResponse};
 use http::Method;
@@ -12,8 +13,10 @@ async fn main() -> Result<(), Error> {
 }
 
 pub async fn handler(req: Request) -> Result<Response<Body>, Error> {
-    // TODO: Add authentication middleware
     assert_eq!(*req.method(), Method::GET);
+    if let Some(response) = authorize_middleware(&req).await {
+        return Ok(response);
+    };
 
     match collections::event::list().await {
         Err(_) => not_found(APIError {
